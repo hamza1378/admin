@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 // Import images
-import image1 from '../../images/image1.jpeg';
-import image2 from '../../images/image2.jpg';
-import image3 from '../../images/image3.jpg';
+import image1 from '../../images/signin/image1.jpeg';
+import image2 from '../../images/signin/image2.jpg';
+import image3 from '../../images/signin/image3.jpg';
 
 const images = [image1, image2, image3]; // Array of image sources
 
@@ -24,24 +24,28 @@ const ImageSlider = () => {
   }, []);
 
   return (
-    <div className="relative w-full h-full overflow-hidden flex flex-col items-center">
+    <div className="relative w-full h-full overflow-hidden flex items-center justify-center">
+      {/* Slider Container */}
       <div
-        className="transition-transform duration-1000 ease-in-out"
-        style={{ transform: `translateX(-${currentIndex * 100}%)`, display: 'flex' }}
+        className="w-full h-full transition-transform duration-1000 ease-in-out flex"
+        style={{ transform: `translateX(-${currentIndex * 100}%)` }}
       >
         {images.map((image, index) => (
           <div key={index} className="relative w-full h-full flex-shrink-0">
+            {/* Image */}
             <img
               src={image}
               alt={`Slide ${index + 1}`}
-              className="w-full h-full object-contain"
+              className="w-full h-full object-cover" // Make sure the image covers the full height and width of the container
             />
-            {/* Update gradient styling */}
-            <div className="absolute inset-0 bg-gradient-to-t from-green-500 to-transparent opacity-50" />
+            {/* Gradient Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-lightGreen to-transparent opacity-80" />
           </div>
         ))}
       </div>
-      <div className="absolute bottom-10 flex justify-center space-x-2">
+
+      {/* Slider Dots */}
+      <div className="absolute bottom-4 flex justify-center space-x-2 z-10">
         {images.map((_, index) => (
           <div
             key={index}
@@ -52,7 +56,9 @@ const ImageSlider = () => {
           />
         ))}
       </div>
-      <p className="absolute bottom-20 text-white font-ubuntu font-semibold text-center sm:text-lg md:text-2xl px-4 w-full">
+
+      {/* Slider Text */}
+      <p className="absolute bottom-16 text-white font-ubuntu font-semibold text-center sm:text-lg md:text-2xl px-4 w-full z-10">
         Welcome back, Please sign in to continue...
       </p>
     </div>

@@ -1,16 +1,29 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Sign_In from './screens/sign_In/Sign_In';
-
+import { SignIn } from './screens';
+import AdminLayout from './Layout/adminLayout/AdminLayout'; // Adjust the import path as needed
+import Dashboard from './screens/dashBoard/DashBoard'; // Adjust the import path as needed
 
 const App: React.FC = () => {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Sign_In />} />
-      </Routes>
-    </Router>
+    <Routes>
+      {/* SignIn Route */}
+      <Route path="/" element={<SignIn />} />
+
+      {/* Admin Routes using AdminLayout */}
+      <Route path="/admin" element={<AdminLayout />}>
+        <Route path="dashboard" element={<Dashboard />} />
+        {/* Add more routes inside AdminLayout as needed */}
+      </Route>
+    </Routes>
   );
 };
 
-export default App;
+// Wrap App with Router
+const WrappedApp: React.FC = () => (
+  <Router>
+    <App />
+  </Router>
+);
+
+export default WrappedApp;
